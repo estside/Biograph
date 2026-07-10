@@ -39,7 +39,7 @@ def predict_stability(request):
             temp_file_path = temp_file.name
 
         # Initialize the Gradio client with the Hugging Face Space stability predictor
-        hf_client = Client("estside/3D-GNN-Stability-Predictor")
+        hf_client = Client("estside/3D-GNN-Stability-Predictor", httpx_kwargs={"timeout": 120.0})
 
         # Ping the ML model on Hugging Face
         result = hf_client.predict(
