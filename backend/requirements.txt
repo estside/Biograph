@@ -1,2 +1,4 @@
 Django==4.2.30
 httpx==0.28.1
+django-cors-headers==4.2.0
+python-dotenv==1.0.0
