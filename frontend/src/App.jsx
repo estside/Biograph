@@ -74,7 +74,7 @@ const ProteinViewer = ({ pdbId, file }) => {
     <div 
       ref={viewerRef} 
       className="w-full h-full relative"
-      style={{ minHeight: '400px' }}
+      style={{ minHeight: '400px', minWidth: '300px' }}
     />
   );
 };
@@ -283,7 +283,11 @@ export default function App() {
                     <div>
                       <p className="text-sm text-gray-500 font-medium">Predicted ΔΔG</p>
                       <div className="flex items-baseline">
-                        <span className="text-4xl font-black text-gray-900">{result > 0 ? '+' : ''}{result.toFixed(2)}</span>
+                        <span className="text-4xl font-black text-gray-900">
+                          {typeof result === 'number' && !isNaN(result) 
+                            ? (result > 0 ? '+' : '') + result.toFixed(2) 
+                            : 'Error'}
+                        </span>
                         <span className="ml-1 text-sm text-gray-500">kcal/mol</span>
                       </div>
                     </div>
@@ -299,12 +303,16 @@ export default function App() {
                     )}
                     <div>
                       <p className="text-sm font-bold">
-                        {result < 0 ? 'Stabilizing Mutation' : 'Destabilizing Mutation'}
+                        {typeof result === 'number' && !isNaN(result)
+                          ? (result < 0 ? 'Stabilizing Mutation' : 'Destabilizing Mutation')
+                          : 'Unknown Effect'}
                       </p>
                       <p className="text-xs mt-0.5 opacity-80">
-                        {result < 0 
-                          ? 'This mutation is predicted to improve structural stability.'
-                          : 'This mutation likely disrupts folding or binding affinity.'}
+                        {typeof result === 'number' && !isNaN(result)
+                          ? (result < 0 
+                              ? 'This mutation is predicted to improve structural stability.'
+                              : 'This mutation likely disrupts folding or binding affinity.')
+                          : 'The predicted effect could not be calculated.'}
                       </p>
                     </div>
                   </div>
