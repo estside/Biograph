@@ -1,0 +1,1 @@
+web: gunicorn biograph_backend.wsgi:application
