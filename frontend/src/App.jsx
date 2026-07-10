@@ -121,7 +121,8 @@ export default function App() {
 
       formData.append('mutation', mut);
 
-      const response = await fetch('http://127.0.0.1:8000/api/predict-stability/', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${apiUrl.replace(/\/$/, '')}/api/predict-stability/`, {
         method: 'POST',
         body: formData,
       });
@@ -141,7 +142,13 @@ export default function App() {
         setError(errorMsg);
       }
     } catch (err) {
-      setError(typeof err.message === 'string' ? err.message : 'Failed to connect to the prediction gateway.');
+      // If the backend returns a raw 500 error without CORS headers, the browser throws "Load failed" / "Failed to fetch"
+      const isNetworkError = err.message === 'Load failed' || err.message === 'Failed to fetch';
+      const errorMsg = isNetworkError 
+        ? `Network Error: The backend server is unreachable or rejected the request due to CORS. Please check the backend server logs for the original error.`
+        : (typeof err.message === 'string' ? err.message : 'Failed to connect to the prediction gateway.');
+      
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
