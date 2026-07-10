@@ -1,6 +1,2 @@
-django
-djangorestframework
-django-cors-headers
-gradio_client>=1.0.0
-gunicorn
-python-dotenv
+Django==4.2.30
+httpx==0.28.1

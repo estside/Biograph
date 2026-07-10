@@ -1,87 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  body {
-    background-color: #05060b;
-    color: #e5e7eb;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', sans-serif;
-  }
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #09090b;
+  background: #fafafa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom background glow effects */
-.glow-bg-cyan {
-  position: absolute;
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(79, 172, 254, 0.03) 50%, rgba(0,0,0,0) 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+* {
+  box-sizing: border-box;
 }
 
-.glow-bg-violet {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(162, 28, 175, 0.08) 0%, rgba(139, 92, 246, 0.02) 60%, rgba(0,0,0,0) 75%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
+body {
+  margin: 0;
+  min-width: 320px;
 }
 
-/* Glassmorphism utilities */
-.glass-panel {
-  background: rgba(13, 16, 28, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-card-interactive {
-  background: rgba(18, 22, 38, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-card-interactive:hover {
-  background: rgba(22, 28, 48, 0.7);
-  border-color: rgba(0, 242, 254, 0.2);
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.05);
-}
-
-/* Animations */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-/* Hide default scrollbar but keep scrollability */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(13, 16, 28, 0.3);
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+button,
+input {
+  font: inherit;
 }

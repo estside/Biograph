@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Protein Stability Gateway MVP</title>
+    <style>
+        body { font-family: sans-serif; padding: 50px; max-width: 600px; margin: auto; }
+        .result-box { background: #e0ffe0; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        .error-box { background: #ffe0e0; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        .score-output { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+    <h1>Protein Stability Filter</h1>
+    <p>Upload a PDB file to test the Hugging Face API connection.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div style="margin-bottom: 15px;">
+            <label><strong>1. Upload PDB File:</strong></label><br>
+            <input type="file" name="pdb_file" accept=".pdb" required>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label><strong>2. Target Mutation (e.g., A12G):</strong></label><br>
+            <input type="text" name="mutation" required placeholder="A12G">
+        </div>
+
+        <button type="submit" style="padding: 10px 20px; cursor: pointer;">Run Prediction</button>
+    </form>
+
+    {% if success %}
+        <div class="result-box">
+            <h2>Prediction Complete!</h2>
+            <p><strong>Raw Score:</strong></p>
+            <p class="score-output">{{ score }}</p>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error-box">
+            <h2>Something went wrong:</h2>
+            <p>{{ error }}</p>
+        </div>
+    {% endif %}
+
+</body>
+</html>
